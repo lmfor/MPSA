@@ -2,6 +2,7 @@ package com.lmfor.github.minecraftPluginSortingAlgorithm;
 
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.CommandPosition;
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.CommandWand;
+import com.lmfor.github.minecraftPluginSortingAlgorithm.Listeners.StoneBreakListener;
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Listeners.XPBottleBreakListener;
 import org.bukkit.Location;
 import org.bukkit.block.data.BlockData;
@@ -33,6 +34,7 @@ public final class Plugin extends JavaPlugin {
 
         // XP BOTTLE BREAK LISTENER EVENT
         getServer().getPluginManager().registerEvents(new XPBottleBreakListener(),this);
+        getServer().getPluginManager().registerEvents(new StoneBreakListener(), this);
 
         // -------------------------------- Register Commands --------------------------------
 

@@ -12,10 +12,17 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class WandBlockBreakListener implements Listener
 {
+    // Cooldown variables
+    private final Map<UUID, Long> cooldowns = new HashMap<>();
+    private final long cooldownTime = 1000; //ms
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e)
     {
@@ -50,6 +57,17 @@ public class WandBlockBreakListener implements Listener
 
         Player p = e.getPlayer();
         ItemStack heldItem = p.getInventory().getItemInMainHand();
+        UUID playerID = p.getUniqueId();
+
+        long currentTime = System.currentTimeMillis();
+        if(cooldowns.containsKey(playerID))
+        {
+            long lastTime = cooldowns.get(playerID);
+            if(currentTime - lastTime < cooldownTime){
+                return;
+            }
+        }
+        cooldowns.put(playerID, currentTime);
 
         if (heldItem.getType() == Material.STICK)
         {

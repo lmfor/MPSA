@@ -13,3 +13,6 @@ commands:
   undo:
     description: Undoes recent position filling
     usage: /<command>
+  wand:
+    description: Summons a wand
+    usage: /<command>

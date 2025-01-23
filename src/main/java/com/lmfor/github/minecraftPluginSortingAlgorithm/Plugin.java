@@ -1,6 +1,7 @@
 package com.lmfor.github.minecraftPluginSortingAlgorithm;
 
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.CommandPosition;
+import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.CommandWand;
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Listeners.XPBottleBreakListener;
 import org.bukkit.Location;
 import org.bukkit.block.data.BlockData;
@@ -39,6 +40,9 @@ public final class Plugin extends JavaPlugin {
         Objects.requireNonNull(getCommand("pos1")).setExecutor(new CommandPosition());
         Objects.requireNonNull(getCommand("pos2")).setExecutor(new CommandPosition());
         Objects.requireNonNull(getCommand("undo")).setExecutor(new CommandPosition());
+
+        // WAND COMMAND
+        Objects.requireNonNull(getCommand("wand")).setExecutor(new CommandWand());
     }
 
 

@@ -39,6 +39,7 @@ public class CommandPosition implements CommandExecutor {
                     block_at_player_location.setBlockData(redstone_block);
 
                 }
+
                 //Location l = p.getLocation();
 
 

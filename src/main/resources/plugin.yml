@@ -1,0 +1,15 @@
+name: MinecraftPluginSortingAlgorithm
+version: '1.0-SNAPSHOT'
+main: com.lmfor.github.minecraftPluginSortingAlgorithm.Plugin
+api-version: '1.21'
+
+commands:
+  pos1:
+    description: Saves Location (1)
+    usage: /<command>
+  pos2:
+    description: Saves Location (2)
+    usage: /<command>
+  undo:
+    description: Undoes recent position filling
+    usage: /<command>

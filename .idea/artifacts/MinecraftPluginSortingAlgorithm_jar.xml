@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MinecraftPluginSortingAlgorithm:jar">
+    <output-path>$PROJECT_DIR$/../../../../Development/TestServer/plugins</output-path>
+    <root id="archive" name="MinecraftPluginSortingAlgorithm.jar">
+      <element id="module-output" name="MinecraftPluginSortingAlgorithm" />
+    </root>
+  </artifact>
+</component>

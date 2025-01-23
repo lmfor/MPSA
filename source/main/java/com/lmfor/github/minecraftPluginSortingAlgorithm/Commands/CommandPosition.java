@@ -28,6 +28,8 @@ public class CommandPosition implements CommandExecutor {
                 Location updated_location = new Location(p.getWorld(), p.getLocation().getBlockX(), p.getLocation().getBlockY()-1, p.getLocation().getBlockZ());
                 Block block_at_player_location = updated_location.getBlock();
 
+                // Try except
+
                 try{
                     String blockType = args[0];
                     BlockData blockChoice = Bukkit.createBlockData("minecraft:" + blockType);

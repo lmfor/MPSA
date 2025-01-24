@@ -1,4 +1,4 @@
-package com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms;
+package com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms.Misc;
 
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Plugin;
 import org.bukkit.ChatColor;
@@ -11,7 +11,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class SetupCommand implements CommandExecutor {
@@ -139,8 +138,11 @@ public class SetupCommand implements CommandExecutor {
 
                                     // update lists
                                     //list_d[i] = range_value;
-                                    list_v.add(range_value);
+
+
                                 }
+                                list_v.add(range_value);
+                                //System.out.println("Range value: " + range_value);
 
                                 Plugin.getPlugin().original_arraylist = list_v;
                                 //Plugin.getPlugin().original_list = list_d;

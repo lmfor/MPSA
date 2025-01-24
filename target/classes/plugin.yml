@@ -23,3 +23,6 @@ commands:
     description: Resets values for positions (start and end)
     usage: /<command>
     aliases: r
+  sort:
+    description: Sorts visualized & scrambled wool data
+    usage: /<command>

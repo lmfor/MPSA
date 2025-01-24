@@ -2,8 +2,9 @@ package com.lmfor.github.minecraftPluginSortingAlgorithm;
 
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.CommandPosition;
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.CommandWand;
-import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms.ResetCommand;
-import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms.SetupCommand;
+import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms.Misc.ResetCommand;
+import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms.SortCommand;
+import com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms.Misc.SetupCommand;
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Listeners.StoneBreakListener;
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Listeners.WandBlockBreakListener;
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Listeners.XPBottleBreakListener;
@@ -65,6 +66,9 @@ public final class Plugin extends JavaPlugin {
 
         // RESET COMMAND
         Objects.requireNonNull(getCommand("reset")).setExecutor(new ResetCommand());
+
+        // SORT COMMAND
+        Objects.requireNonNull(getCommand("sort")).setExecutor(new SortCommand());
     }
 
 

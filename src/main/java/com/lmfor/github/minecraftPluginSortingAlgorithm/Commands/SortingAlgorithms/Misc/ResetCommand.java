@@ -1,4 +1,4 @@
-package com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms;
+package com.lmfor.github.minecraftPluginSortingAlgorithm.Commands.SortingAlgorithms.Misc;
 
 import com.lmfor.github.minecraftPluginSortingAlgorithm.Plugin;
 import org.bukkit.ChatColor;

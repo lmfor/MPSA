@@ -23,9 +23,14 @@ public class WandBlockBreakListener implements Listener
     private final Map<UUID, Long> cooldowns = new HashMap<>();
     private final long cooldownTime = 1000; //ms
 
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e)
     {
+        // if start block hasnt been used yet, then simply set to glowstone
+        // if start back HAS been used yet, reset it to stone, then set new block
+
+
 
         // only if wand is held :
         Player p = e.getPlayer();
@@ -33,8 +38,17 @@ public class WandBlockBreakListener implements Listener
 
         if (heldItem.getType() == Material.STICK)
         {
+            if (Plugin.getPlugin().start == null) {
+                e.getBlock().setType(Material.GLOWSTONE);
+            } else {
+                Plugin.getPlugin().start.setType(Material.STONE);
+                e.getBlock().setType(Material.GLOWSTONE);
+            }
+
+
             Plugin.getPlugin().start = e.getBlock();
             p.sendMessage(ChatColor.LIGHT_PURPLE + String.format("Selected position 1 at %d, %d, %d", e.getBlock().getX(), e.getBlock().getY(), e.getBlock().getZ()));
+
             e.setCancelled(true);
         }
 
@@ -69,10 +83,23 @@ public class WandBlockBreakListener implements Listener
         }
         cooldowns.put(playerID, currentTime);
 
+        // if end block hasnt been used yet, then simply set to glowstone
+        // if end back HAS been used yet, reset it to stone, then set new block
+
         if (heldItem.getType() == Material.STICK)
         {
-            Plugin.getPlugin().start = e.getClickedBlock();
+            if (Plugin.getPlugin().end == null)
+            {
+                e.getClickedBlock().setType(Material.GLOWSTONE);
+            } else {
+                Plugin.getPlugin().end.setType(Material.STONE);
+                e.getClickedBlock().setType(Material.GLOWSTONE);
+            }
+
+
+            Plugin.getPlugin().end = e.getClickedBlock();
             p.sendMessage(ChatColor.DARK_PURPLE + String.format("Selected position 2 at %d, %d, %d", Objects.requireNonNull(e.getClickedBlock()).getX(), e.getClickedBlock().getY(), e.getClickedBlock().getZ()));
+
             e.setCancelled(true);
             return;
         }

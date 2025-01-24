@@ -16,3 +16,10 @@ commands:
   wand:
     description: Summons a wand
     usage: /<command>
+  setup:
+    description: Sets up data for visualization
+    usage: /<command>
+  reset:
+    description: Resets values for positions (start and end)
+    usage: /<command>
+    aliases: r

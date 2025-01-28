@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class SortCommand implements CommandExecutor {
     // Delay between each step of the sorting algorithm (in ticks)
-    private static final long DELAY_TICKS = 2; // Adjust this for faster/slower visualization
+    private static final long DELAY_TICKS = 1L; // Adjust this for faster/slower visualization
     public int range = Plugin.getPlugin().range;
 
     @Override
@@ -51,6 +51,7 @@ public class SortCommand implements CommandExecutor {
                     new BukkitRunnable() {
                         int i = 1; // Start from the second element
                         int currentIndex = i; // Track the current column being processed
+                        int swapIndex = -1; // Track the column being swapped with
 
                         @Override
                         public void run() {
@@ -58,9 +59,10 @@ public class SortCommand implements CommandExecutor {
                                 int key = list.get(i);
                                 int j = i - 1;
 
-                                // Highlight the current column in red wool
+                                // Highlight the current column and the column being compared
                                 currentIndex = i;
-                                updateBlocks(world, baseX, baseY, baseZ, list, currentIndex, range);
+                                swapIndex = j;
+                                updateBlocks(world, baseX, baseY, baseZ, list, currentIndex, swapIndex, range);
 
                                 // Move elements greater than key to the right
                                 while (j >= 0 && list.get(j) > key) {
@@ -68,19 +70,25 @@ public class SortCommand implements CommandExecutor {
                                     j--;
 
                                     // Update visualization after each swap
-                                    updateBlocks(world, baseX, baseY, baseZ, list, currentIndex, range);
+                                    swapIndex = j;
+                                    updateBlocks(world, baseX, baseY, baseZ, list, currentIndex, swapIndex, range);
                                 }
 
                                 // Place key in its correct position
                                 list.set(j + 1, key);
 
                                 // Update visualization after placing key
-                                updateBlocks(world, baseX, baseY, baseZ, list, currentIndex, range);
+                                swapIndex = j + 1;
+                                updateBlocks(world, baseX, baseY, baseZ, list, currentIndex, swapIndex, range);
 
                                 i++;
                             } else {
                                 // Sorting complete
                                 p.sendMessage(ChatColor.GREEN + "Insertion Sort Complete!");
+
+                                // Reset all red wool blocks to white wool
+                                resetBlocks(world, baseX, baseY, baseZ, list);
+
                                 this.cancel();
                             }
                         }
@@ -94,7 +102,7 @@ public class SortCommand implements CommandExecutor {
     }
 
     // Helper method to update blocks in Minecraft
-    private void updateBlocks(World world, int baseX, int baseY, int baseZ, ArrayList<Integer> list, int currentIndex, int range) {
+    private void updateBlocks(World world, int baseX, int baseY, int baseZ, ArrayList<Integer> list, int currentIndex, int swapIndex, int range) {
         // Find the maximum height in the list
         int maxHeight = 0;
         for (int height : list) {
@@ -116,12 +124,33 @@ public class SortCommand implements CommandExecutor {
             for (int j = 0; j < height; j++) {
                 Block block = world.getBlockAt(baseX + i, baseY + 1 + j, baseZ);
 
-                // Highlight the current column in red wool
-                if (i == currentIndex) {
+                // Highlight the current column and the swap column in red wool
+                if (i == currentIndex || i == swapIndex) {
                     block.setType(Material.RED_WOOL);
                 } else {
                     block.setType(Material.WHITE_WOOL);
                 }
+            }
+        }
+    }
+
+    // Helper method to reset all red wool blocks to white wool
+    private void resetBlocks(World world, int baseX, int baseY, int baseZ, ArrayList<Integer> list) {
+        // Find the maximum height in the list
+        int maxHeight = 0;
+        for (int height : list) {
+            if (height > maxHeight) {
+                maxHeight = height;
+            }
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            int height = list.get(i);
+
+            // Reset all blocks in this column to white wool
+            for (int j = 0; j < height; j++) {
+                Block block = world.getBlockAt(baseX + i, baseY + 1 + j, baseZ);
+                block.setType(Material.WHITE_WOOL);
             }
         }
     }

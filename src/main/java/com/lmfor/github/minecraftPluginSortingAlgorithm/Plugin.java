@@ -29,6 +29,9 @@ public final class Plugin extends JavaPlugin {
     // Global Variables Regarding CommandWand
     public Block start, end;
 
+    // Global Variables Regarding SortCommand
+    public int range;
+
     // ------------------------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------------------------
     // -------------------------------- GLOBAL VARIABLES FOR SORTING --------------------------------

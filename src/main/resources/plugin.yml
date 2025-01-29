@@ -25,4 +25,4 @@ commands:
     aliases: r
   sort:
     description: Sorts visualized & scrambled wool data
-    usage: /<command>
+    usage: /<command> <sort method>

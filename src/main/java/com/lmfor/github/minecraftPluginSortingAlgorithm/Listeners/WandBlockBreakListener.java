@@ -99,6 +99,10 @@ public class WandBlockBreakListener implements Listener
 
             Plugin.getPlugin().end = e.getClickedBlock();
             p.sendMessage(ChatColor.DARK_PURPLE + String.format("Selected position 2 at %d, %d, %d", Objects.requireNonNull(e.getClickedBlock()).getX(), e.getClickedBlock().getY(), e.getClickedBlock().getZ()));
+            if (Plugin.getPlugin().start != null)
+            {
+                p.sendMessage(ChatColor.LIGHT_PURPLE + "Length: " + (Plugin.getPlugin().end.getX()-Plugin.getPlugin().start.getX()));
+            }
 
             e.setCancelled(true);
             return;

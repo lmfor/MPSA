@@ -143,10 +143,10 @@ public class SortCommand implements CommandExecutor {
                                     merge(list, temp, left, mid, right);
 
                                     // Update Minecraft visualization
-                                    updateBlocks(world, baseX, baseY, baseZ, list, left, right, range);
+                                    updateBlocks(world, baseX, baseY, baseZ, list, left, right);
                                     world.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 1, 1);
 
-                                    p.sendMessage(ChatColor.YELLOW + "Merged from " + left + " to " + right);
+                                    // p.sendMessage(ChatColor.YELLOW + "Merged from " + left + " to " + right);
                                 }
                             } else {
                                 p.sendMessage(ChatColor.GREEN + "Merge Sort Complete!");
@@ -216,7 +216,42 @@ public class SortCommand implements CommandExecutor {
         }
     }
 
-    // Helper method to update blocks in Minecraft
+    // Helper method to update blocks
+    private void updateBlocks(World world, int baseX, int baseY, int baseZ, ArrayList<Integer> list, int currentIndex, int swapIndex)
+    {
+        int maxHeight = 0;
+        for (int height : list) {
+            if (height > maxHeight) {
+                maxHeight = height;
+            }
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            int height = list.get(i);
+
+            // Clear blocks above the new height for this column
+            for (int y = baseY + 1; y <= baseY + maxHeight; y++) {
+                Block block = world.getBlockAt(baseX + i, y, baseZ);
+                block.setType(Material.AIR);
+            }
+
+            // Place new blocks up to the current height
+            for (int j = 0; j < height; j++) {
+                Block block = world.getBlockAt(baseX + i, baseY + 1 + j, baseZ);
+
+                // Highlight the current column and the swap column in red wool
+                if (i >= currentIndex && i <= swapIndex) { // if i is between currentIndex and swap index
+                    block.setType(Material.RED_WOOL);
+                } else {
+                    block.setType(Material.WHITE_WOOL);
+                }
+
+                //if(i >= currentIndex && i <= swapIndex)
+                //if(i >= swapIndex && i <= currentIndex)
+            }
+        }
+    }
+
     private void updateBlocks(World world, int baseX, int baseY, int baseZ, ArrayList<Integer> list, int currentIndex, int swapIndex, int range) {
         // Find the maximum height in the list
         int maxHeight = 0;
